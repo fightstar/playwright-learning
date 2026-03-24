@@ -1,4 +1,5 @@
 import { Page, Locator } from "@playwright/test";
+import type { UserData } from "../data/testData";
 
 export class RegisterPage {
   readonly openRegisterFormButton: Locator;
@@ -30,22 +31,20 @@ export class RegisterPage {
     await this.page.goto("https://aqa-app.vercel.app/login");
   }
 
-  async fillRegistrationForm()
+  async fillRegistrationForm( testData: UserData)
   {
     await this.openRegisterFormButton.click();
-    await this.firstNameField.fill("Ross");
-    await this.lastNameField.fill("Geller");
-    await this.emailField.fill("ross.geller@example.com");
-    await this.passwordField.fill("password123");
-    await this.cityField.fill("Dnipro");
-    await this.countryField.selectOption("Ukraine");
-    await this.phoneField.fill("+380345678901");
-    await this.streetField.fill("123 Main St");
-    await this.zipCodeField.fill("10001");
+    await this.firstNameField.fill(testData.firstName);
+    await this.lastNameField.fill(testData.lastName);
+    await this.emailField.fill(testData.email);
+    await this.passwordField.fill(testData.password);
+    await this.cityField.fill(testData.city);
+    await this.countryField.selectOption(testData.country);
+    await this.phoneField.fill(testData.phone);
+    await this.streetField.fill(testData.street);
+    await this.zipCodeField.fill(testData.zipCode);
     await this.submitRegistrationButton.click();
 
   }
-
-
 
 }
