@@ -14,11 +14,19 @@ export type UserData = {
 export const newUser1: UserData = {
   firstName: "Ross",
   lastName: "Geller",
-  email: "ross.geller@example.com",
-  password: "password123",
+  email: getEnv("NEW_USER_1_EMAIL"),
+  password: getEnv("NEW_USER_1_PASSWORD"),
   city: "Dnipro",
   country: "Ukraine",
   phone: "+380345678901",
   street: "123 Main St",
   zipCode: "10001"
 };
+
+function getEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`${name} is not set`);
+  }
+  return value;
+}
