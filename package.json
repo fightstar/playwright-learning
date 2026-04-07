@@ -2,7 +2,13 @@
   "name": "playwright-learning",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:one": "playwright test tests/e2e.spec.ts",
+    "test:e2e:debug": "playwright test --debug"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -10,5 +16,8 @@
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.3.1"
   }
 }
