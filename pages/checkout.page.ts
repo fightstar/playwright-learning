@@ -22,7 +22,8 @@ export class CheckoutPage
     }
     async fillPaymentData(cardNumber:string, expireDate:string, cvvCode:string)
     {
-        await this.cardNumberField.fill(cardNumber);
+        await this.cardNumberField.type(cardNumber, {delay:100});
+        await this.cardNumberField.press('Enter');
         await this.expireDate.fill(expireDate);
         await this.cvvCode.fill(cvvCode);
         await this.payNowBtn.first().click();
@@ -36,7 +37,7 @@ export class CheckoutPage
     async goToMyAccount()
     {
         await this.myAccountLink.click();
-        await this.page.pause();
+        await expect(this.page).toHaveURL('https://aqa-app.vercel.app/account');
     }
 
 }
