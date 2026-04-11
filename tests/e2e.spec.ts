@@ -22,5 +22,6 @@ test("test", async ({ page }) => {
     await checkoutPage.successOrderMessage();
     await checkoutPage.goToMyAccount();
     await myAccountPage.checkFinalOrder(catalogPage.tabletPriceValue, catalogPage.coffeeMachinePriceValue);
+    await myAccountPage.checkTwoItems();
 });
 

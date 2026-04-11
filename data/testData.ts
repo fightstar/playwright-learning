@@ -1,3 +1,9 @@
+import { faker } from '@faker-js/faker';
+
+const month = faker.number.int({ min: 1, max: 12 }).toString().padStart(2, '0');
+const year = faker.number.int({ min: 27, max: 35 }).toString();
+const cardExpiredDate = `${month}/${year}`;
+
 export type UserData = {
   firstName: string;
   lastName: string;
@@ -19,22 +25,23 @@ export type CardData =
 
 
 export const newUser1 : UserData = {
-  firstName: "Ross",
-  lastName: "Geller",
-  email: getEnv("NEW_USER_1_EMAIL"),
-  password: getEnv("NEW_USER_1_PASSWORD"),
-  city: "Dnipro",
+  firstName: faker.person.firstName(),
+  lastName: faker.person.lastName(),
+  email: faker.internet.email().toLowerCase(),
+  password:faker.internet.password(),
+  city: faker.location.city(),
   country: "Ukraine",
-  phone: "+380345678901",
-  street: "123 Main St",
-  zipCode: "10001"
+  phone: "+380662589787",
+  street: faker.location.streetAddress(),
+  zipCode: "65611",
 }
 
 export const cardData: CardData =
 {
-  cardNumberField: getEnv('CARd_NUMBER'),
-  expireDate: getEnv('CARD_EXPIRED_DATE'),
-  cvvCode: getEnv('CARD_CVV_CODE')
+
+  cardNumberField: faker.finance.creditCardNumber('################'),
+  expireDate: cardExpiredDate,
+  cvvCode: faker.finance.creditCardCVV()
 }
 
 function getEnv(name: string): string {
