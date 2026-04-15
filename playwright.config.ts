@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config({ path: './.env' });
 
 /**
@@ -42,6 +42,11 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'api-tests',
+      testMatch:'api.spec.ts',
+      use: { baseURL: process.env.API_BASE_URL }
+    }
 
     // {
     //   name: 'firefox',

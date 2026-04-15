@@ -7,7 +7,8 @@
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:one": "playwright test tests/e2e.spec.ts",
-    "test:e2e:debug": "playwright test --debug"
+    "test:e2e:debug": "playwright test --debug",
+    "api": "npx playwright test --project=api-tests"
   },
   "keywords": [],
   "author": "",

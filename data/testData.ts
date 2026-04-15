@@ -23,7 +23,6 @@ export type CardData =
   cvvCode: string;
 }
 
-
 export const newUser1 : UserData = {
   firstName: faker.person.firstName(),
   lastName: faker.person.lastName(),
@@ -43,6 +42,16 @@ export const cardData: CardData =
   expireDate: cardExpiredDate,
   cvvCode: faker.finance.creditCardCVV()
 }
+
+export const apiDataPost = {
+  title: "Hello world",
+  body: "Test body",
+  userId: 1,
+};
+
+export const apiDataPatch = {
+  title: "Hello Vlad",
+};
 
 function getEnv(name: string): string {
   const value = process.env[name];
