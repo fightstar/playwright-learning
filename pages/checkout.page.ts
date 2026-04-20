@@ -37,7 +37,7 @@ export class CheckoutPage
     async goToMyAccount()
     {
         await this.myAccountLink.click();
-        await expect(this.page).toHaveURL('https://aqa-app.vercel.app/account');
+        await expect(this.page).toHaveURL('/account');
     }
 
 }

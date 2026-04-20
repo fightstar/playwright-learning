@@ -43,6 +43,11 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
     {
+      name: 'e2e-tests',
+      testMatch:'e2e.spec.ts',
+      use: { baseURL: process.env.UI_BASE_URL }
+    },
+    {
       name: 'api-tests',
       testMatch:'api.spec.ts',
       use: { baseURL: process.env.API_BASE_URL }

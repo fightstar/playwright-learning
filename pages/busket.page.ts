@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from "@playwright/test";
-import { CatalogPage } from "./catalog.page";
+import { SelectedProducts } from "../data/types";
 
 export class BusketPage {
   readonly firstProductItem: Locator;
@@ -10,20 +10,9 @@ export class BusketPage {
   readonly checkoutBtn: Locator;
   readonly removeFirstItemBtn: Locator;
   readonly addFirstItemBtn: Locator;
-  tabletNameValue: string;
-  coffeeMachineNameValue: string;
-  tabletPriceValue: string;
-  coffeeMachinePriceValue: string;
   readonly totalCount: Locator;
 
-  constructor(
-    readonly page: Page,
-    tabletNameValue: string,
-    coffeeMachineNameValue: string,
-    tabletPriceValue: string,
-    coffeeMachinePriceValue: string,
-  ) {
-    this.page = page;
+  constructor(readonly page: Page) {
     this.firstProductItem = page.locator('[id="cart-item-name-6"]');
     this.secondProductItem = page.locator('[id="cart-item-name-5"]');
     this.firstItemPrice = page.locator('[id="cart-item-price-6"]');
@@ -33,18 +22,14 @@ export class BusketPage {
     this.removeFirstItemBtn = page.locator('[id="cart-item-decrease-6"]');
     this.addFirstItemBtn = page.locator('[id="cart-item-increase-6"]');
 
-    this.tabletNameValue = tabletNameValue;
-    this.coffeeMachineNameValue = coffeeMachineNameValue;
-    this.tabletPriceValue = tabletPriceValue;
-    this.coffeeMachinePriceValue = coffeeMachinePriceValue;
     this.totalCount = page.locator('[id="cart-total"]');
   }
 
-  async CompareProductDetails() {
-    await expect(this.firstProductItem).toHaveText(this.coffeeMachineNameValue);
-    await expect(this.secondProductItem).toHaveText(this.tabletNameValue);
-    await expect(this.firstItemPrice).toHaveText(this.coffeeMachinePriceValue);
-    await expect(this.secondItemPrice).toHaveText(this.tabletPriceValue);
+  async CompareProductDetails(items: SelectedProducts) {
+    await expect(this.firstProductItem).toHaveText(items.secondProduct.name);
+    await expect(this.secondProductItem).toHaveText(items.firstProduct.name);
+    await expect(this.firstItemPrice).toHaveText(items.secondProduct.price);
+    await expect(this.secondItemPrice).toHaveText(items.firstProduct.price);
   }
 
   async CheckTotalPrice() {
@@ -61,8 +46,8 @@ export class BusketPage {
     );
 
     expect(totalNumber).toBe(firstPriceNumber + secondPriceNumber);
-    await this.checkoutBtn.click({force: true});
+    await this.checkoutBtn.click({ force: true });
 
-    await this.page.waitForURL('https://aqa-app.vercel.app/checkout');
+    await this.page.waitForURL("/checkout");
   }
 }
